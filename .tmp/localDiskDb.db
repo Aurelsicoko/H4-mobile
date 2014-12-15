@@ -1,18 +1,438 @@
 {
   "data": {
-    "user": [],
-    "event_guests__user_participated": [],
     "event": [
       {
-        "createdAt": "2014-12-15T10:46:16.747Z",
-        "updatedAt": "2014-12-15T10:46:16.747Z",
-        "id": 1
+        "title": "event_title",
+        "author": 1,
+        "content": "A short description of the event",
+        "readed": {},
+        "users": [
+          1
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:48:07.645Z",
+        "updatedAt": "2014-12-15T15:48:07.655Z",
+        "id": 13
+      },
+      {
+        "title": "event_title",
+        "author": 1,
+        "content": "A short description of the event",
+        "readed": {},
+        "users": [
+          1
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:48:25.101Z",
+        "updatedAt": "2014-12-15T15:48:25.108Z",
+        "id": 14
+      },
+      {
+        "title": "event_title",
+        "author": 1,
+        "content": "A short description of the event",
+        "readed": {},
+        "users": [
+          1
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:48:36.633Z",
+        "updatedAt": "2014-12-15T15:48:36.640Z",
+        "id": 15
+      },
+      {
+        "title": "event_title",
+        "author": 1,
+        "content": "A short description of the event",
+        "readed": {},
+        "users": [
+          1
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:48:57.398Z",
+        "updatedAt": "2014-12-15T15:48:57.406Z",
+        "id": 16
+      },
+      {
+        "title": "event_title",
+        "author": 2,
+        "content": "A short description of the event",
+        "readed": {},
+        "users": [
+          2
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:50:43.864Z",
+        "updatedAt": "2014-12-15T15:50:43.869Z",
+        "id": 17
+      },
+      {
+        "title": "event_title",
+        "author": 2,
+        "content": "A short description of the event",
+        "readed": {},
+        "users": [
+          2
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:52:07.061Z",
+        "updatedAt": "2014-12-15T15:52:07.083Z",
+        "id": 18
+      },
+      {
+        "title": "event_title",
+        "author": 3,
+        "content": "A short description of the event",
+        "readed": {},
+        "users": [
+          3
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:52:52.145Z",
+        "updatedAt": "2014-12-15T15:52:52.151Z",
+        "id": 19
+      },
+      {
+        "title": "event_title",
+        "author": 3,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          3
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:56:29.135Z",
+        "updatedAt": "2014-12-15T15:56:29.162Z",
+        "id": 20
+      },
+      {
+        "title": "event_title",
+        "author": 3,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          3
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:57:11.741Z",
+        "updatedAt": "2014-12-15T15:57:11.769Z",
+        "id": 21
+      },
+      {
+        "title": "event_title",
+        "author": 3,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          3
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:57:39.525Z",
+        "updatedAt": "2014-12-15T15:57:39.556Z",
+        "id": 22
+      },
+      {
+        "title": "event_title",
+        "author": 3,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          3
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:57:54.145Z",
+        "updatedAt": "2014-12-15T15:57:54.179Z",
+        "id": 23
+      },
+      {
+        "title": "event_title",
+        "author": 3,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          3
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:58:20.194Z",
+        "updatedAt": "2014-12-15T15:58:20.229Z",
+        "id": 24
+      },
+      {
+        "title": "event_title",
+        "author": 4,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          4
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T15:59:37.101Z",
+        "updatedAt": "2014-12-15T15:59:37.128Z",
+        "id": 25
+      },
+      {
+        "title": "event_title",
+        "author": 4,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          4
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T16:00:55.275Z",
+        "updatedAt": "2014-12-15T16:00:55.312Z",
+        "id": 26
+      },
+      {
+        "title": "event_title",
+        "author": 4,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          4
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T16:01:09.625Z",
+        "updatedAt": "2014-12-15T16:01:09.656Z",
+        "id": 27
+      },
+      {
+        "title": "event_title",
+        "author": 4,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          4
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T16:03:37.122Z",
+        "updatedAt": "2014-12-15T16:03:37.153Z",
+        "id": 28
+      },
+      {
+        "title": "event_title",
+        "author": 4,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          4
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T16:04:06.968Z",
+        "updatedAt": "2014-12-15T16:04:07.012Z",
+        "id": 29
+      },
+      {
+        "title": "event_title",
+        "author": 4,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          4
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T16:04:24.884Z",
+        "updatedAt": "2014-12-15T16:04:24.922Z",
+        "id": 30
+      },
+      {
+        "title": "event_title",
+        "author": 4,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          4
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T16:04:39.435Z",
+        "updatedAt": "2014-12-15T16:04:39.487Z",
+        "id": 31
+      },
+      {
+        "title": "event_title",
+        "author": 4,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          4
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T16:06:15.857Z",
+        "updatedAt": "2014-12-15T16:06:15.898Z",
+        "id": 32
+      },
+      {
+        "title": "event_title",
+        "author": 4,
+        "content": "A short description of the event",
+        "readed": {},
+        "guests": [
+          4
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T16:06:38.548Z",
+        "updatedAt": "2014-12-15T16:06:38.594Z",
+        "id": 33
+      },
+      {
+        "title": "event_title",
+        "author": 4,
+        "content": "A short description of the event",
+        "readed": {
+          "4": {
+            "readed": null
+          }
+        },
+        "guests": [
+          4
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T16:07:52.424Z",
+        "updatedAt": "2014-12-15T16:07:52.494Z",
+        "id": 34
+      },
+      {
+        "title": "event_title",
+        "author": 4,
+        "content": "A short description of the event",
+        "readed": {
+          "4": {
+            "readed": null
+          }
+        },
+        "guests": [
+          4
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-15T16:17:37.696Z",
+        "updatedAt": "2014-12-15T16:17:37.775Z",
+        "id": 35
+      }
+    ],
+    "user": [
+      {
+        "facebook_id": "facebook_id",
+        "username": "Charles Talbot",
+        "device": "device_id",
+        "createdAt": "2014-12-15T15:59:24.094Z",
+        "updatedAt": "2014-12-15T15:59:24.094Z",
+        "id": 4
+      }
+    ],
+    "event_guests__user_participated": [
+      {
+        "user_participated": 3,
+        "event_guests": 20,
+        "id": 2
+      },
+      {
+        "user_participated": 3,
+        "event_guests": 21,
+        "id": 3
+      },
+      {
+        "user_participated": 3,
+        "event_guests": 22,
+        "id": 4
+      },
+      {
+        "user_participated": 3,
+        "event_guests": 23,
+        "id": 5
+      },
+      {
+        "user_participated": 3,
+        "event_guests": 24,
+        "id": 6
+      },
+      {
+        "user_participated": 4,
+        "event_guests": 25,
+        "id": 7
+      },
+      {
+        "user_participated": 4,
+        "event_guests": 26,
+        "id": 8
+      },
+      {
+        "user_participated": 4,
+        "event_guests": 27,
+        "id": 9
+      },
+      {
+        "user_participated": 4,
+        "event_guests": 28,
+        "id": 10
+      },
+      {
+        "user_participated": 4,
+        "event_guests": 29,
+        "id": 11
+      },
+      {
+        "user_participated": 4,
+        "event_guests": 30,
+        "id": 12
+      },
+      {
+        "user_participated": 4,
+        "event_guests": 31,
+        "id": 13
+      },
+      {
+        "user_participated": 4,
+        "event_guests": 32,
+        "id": 14
+      },
+      {
+        "user_participated": 4,
+        "event_guests": 33,
+        "id": 15
+      },
+      {
+        "user_participated": 4,
+        "event_guests": 34,
+        "id": 17
+      },
+      {
+        "user_participated": 4,
+        "event_guests": 35,
+        "id": 19
       }
     ]
   },
   "schema": {
+    "event": {
+      "title": {
+        "type": "string"
+      },
+      "content": {
+        "type": "string"
+      },
+      "readed": {
+        "type": "json"
+      },
+      "createdBy": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
     "user": {
-      "id_facebook": {
+      "facebook_id": {
         "type": "string",
         "unique": true
       },
@@ -56,39 +476,17 @@
         "on": "id",
         "via": "event_guests"
       }
-    },
-    "event": {
-      "place": {
-        "type": "string"
-      },
-      "date": {
-        "type": "datetime"
-      },
-      "content": {
-        "type": "string"
-      },
-      "readed": {
-        "type": "json"
-      },
-      "id": {
-        "type": "integer",
-        "autoIncrement": true,
-        "primaryKey": true,
-        "unique": true
-      },
-      "createdAt": {
-        "type": "datetime"
-      },
-      "updatedAt": {
-        "type": "datetime"
-      }
     }
   },
   "counters": {
     "event": {
+      "id": 35
+    },
+    "user": {
       "id": 4
     },
-    "user": {},
-    "event_guests__user_participated": {}
+    "event_guests__user_participated": {
+      "id": 19
+    }
   }
 }

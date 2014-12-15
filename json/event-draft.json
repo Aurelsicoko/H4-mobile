@@ -1,12 +1,7 @@
 {
+  "title": "event_title",
   "author": "user_id_from_sails",
   "content": "A short description of the event",
-  "readed": [{
-    "user": "user_id_from_sails",
-    "readed": "false"
-  }, {
-    "user": "user_id_from_sails",
-    "readed": "true"
-  }],
+  "readed": {},
   "guests": ["user_id", "user_id2", "user_id3"]
 }

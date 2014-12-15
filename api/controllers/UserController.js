@@ -5,6 +5,8 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var Q = require('q');
+
 module.exports = {
 
   /**

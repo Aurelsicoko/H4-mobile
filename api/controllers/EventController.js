@@ -50,7 +50,7 @@ module.exports = {
       if (err) res.badRequest(err);
       res.ok(cb);
     });
-  }
+  },
 
   add: function(scope) {
     var deferred = Q.defer();
@@ -60,35 +60,40 @@ module.exports = {
     } else {
       // Find the author's event
       User.find(scope.author).exec(function(err, user) {
-        if (err) deferred.reject(err);
+        if (err) return deferred.reject(err);
         scope.createdBy = user;
       });
     }
 
     Event.create(scope).exec(function(err, event) {
-      if (err) deferred.reject(err);
+      if (err) return deferred.reject(err);
 
       _.each(scope.guests, function(guest) {
-        User.find(guest).exec(function(err, user) {
-          if (err) deferred.reject(err);
+        User.findOne(guest).exec(function(err, user) {
+          if (err) return deferred.reject(err);
 
-          event.guests.add(user);
           event.save(function(err) {
             if (err) {
-              deferred.reject(err);
+              sails.log(err);
+              return deferred.reject(err);
             } else {
-              sails.controllers['event'].subscribe(event.reader, user, null).then(function(data) {
-                sails.log("User update : " + data);
+              var scope = event;
+              scope.user = user;
+              scope.answer = null;
+
+              sails.controllers['event'].subscribe(scope).then(function(data) {
+                sails.log("User update >>>");
+                sails.log(data);
               }).catch(function(err) {
-                deferred.reject(err);
+                return deferred.reject(err);
               });
             }
           });
         });
+      });
 
-        sails.controllers['events'].get(event).then(function(data) {
-          deferred.resolve(data);
-        });
+      sails.controllers['event'].get(event).then(function(data) {
+        deferred.resolve(data);
       });
 
       console.log('Created - Event');
@@ -138,29 +143,32 @@ module.exports = {
       deferred.resolve("You can't update undefined record");
     }
 
-    Event.find(scope.id).exec(function(err, event) {
-      sails.controllers['event'].updateJSONReader(event.reader, scope.user, scope.answer).then(function(data) {
-        event.reader = data;
+    Event.findOne(scope.id).exec(function(err, event) {
+      sails.controllers['event'].updateJSONReader(event.readed, scope.user.id, scope.answer).then(function(data) {
+        event.readed = data;
         sails.controllers['event'].edit(event).then(function(data) {
           deferred.resolve(data);
         }).catch(function(err) {
           deferred.reject(err);
         });
-      })
-    }).catch(function(err) {
-      deferred.reject(err);
+      }).catch(function(err) {
+        deferred.reject(err);
+      });
     });
 
     return deferred.promise;
   },
 
-  updateJSONReader: function(event_reader, user, bool) {
+  updateJSONReader: function(event_readed, user, bool) {
     var deferred = Q.defer();
 
-    var parse = JSON.parse(event_reader);
-    parse[user.id] = {
+
+    var parse = (event_readed.length > 0) ? JSON.parse(event_readed) : {};
+    parse[user] = {
       readed: (bool) ? bool : null
-    }
+    };
+
+    sails.log(parse);
 
     deferred.resolve(parse);
 

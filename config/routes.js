@@ -30,6 +30,46 @@ module.exports.routes = {
   '/': {
     view: 'homepage'
   },
+  'get /event': {
+    controller: 'EventController',
+    action: 'read'
+  },
+  'get /event/:id': {
+    controller: 'EventController',
+    action: 'read'
+  },
+  'post /event': {
+    controller: 'EventController',
+    action: 'create'
+  },
+  'put /event/:id': {
+    controller: 'EventController',
+    action: 'update'
+  },
+  'delete /event/:id': {
+    controller: 'EventController',
+    action: 'delete'
+  },
+  'get /user': {
+    controller: 'UserController',
+    action: 'read'
+  },
+  'get /user/:id': {
+    controller: 'UserController',
+    action: 'read'
+  },
+  'post /user': {
+    controller: 'UserController',
+    action: 'create'
+  },
+  'put /user/:id': {
+    controller: 'UserController',
+    action: 'update'
+  },
+  'delete /user/:id': {
+    controller: 'UserController',
+    action: 'delete'
+  }
 
 
   // Custom routes here...

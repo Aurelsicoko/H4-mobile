@@ -14,7 +14,6 @@ module.exports = {
    */
 
   create: function(req, res) {
-    sails.log(req.params.all());
     sails.controllers['event'].add(req.params.all()).then(function(data) {
       res.ok(data);
     }).catch(function(err) {
@@ -39,11 +38,9 @@ module.exports = {
   },
 
   delete: function(req, res) {
-    Event.destroy(scope).exec(function(err) {
-      if (err) {
-        return false;
-      }
-      res.ok();
+    Event.destroy(req.param('id')).exec(function(err, cb) {
+      if (err) res.badRequest(err);
+      res.ok(cb);
     });
   },
 
@@ -53,6 +50,13 @@ module.exports = {
 
     if (!scope) {
       deferred.resolve("You can't add undefined record");
+    } else {
+      User.find(scope.user).exec(function(err, user) {
+        if (err) return deferred.reject(err);
+        scope.created = user;
+
+        scope.guest =
+      });
     }
 
     Event.create(scope).exec(function(err, created) {

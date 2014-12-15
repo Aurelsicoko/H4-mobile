@@ -22,6 +22,9 @@ module.exports = {
     readed: {
       type: 'JSON'
     },
+    created: {
+      model: 'user'
+    },
     guests: {
       collection: 'user',
       via: 'participated'

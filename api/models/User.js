@@ -23,6 +23,10 @@ module.exports = {
       type: 'STRING',
       required: true
     },
+    owner: {
+      collection: 'event',
+      via: 'created'
+    },
     participated: {
       collection: 'event',
       via: 'guests',

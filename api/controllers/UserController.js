@@ -36,11 +36,9 @@ module.exports = {
   },
 
   delete: function(req, res) {
-    User.destroy(scope).exec(function(err) {
-      if (err) {
-        return false;
-      }
-      res.ok();
+    User.destroy(scope).exec(function(err, cb) {
+      if (err) res.badRequest(err);
+      res.ok(cb);
     });
   },
 

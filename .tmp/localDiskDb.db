@@ -7,24 +7,6 @@
         "createdAt": "2014-12-15T10:46:16.747Z",
         "updatedAt": "2014-12-15T10:46:16.747Z",
         "id": 1
-      },
-      {
-        "place": "Gaulle",
-        "date": "2011-04-11T11:51:00.000Z",
-        "content": "Allez viens!",
-        "readed": [
-          {
-            "id_facebook": "qkjsqsdqs",
-            "readed": "false"
-          },
-          {
-            "id_facebook": "jlqsdklqjsd",
-            "readed": "true"
-          }
-        ],
-        "createdAt": "2014-12-15T12:30:04.737Z",
-        "updatedAt": "2014-12-15T12:30:04.737Z",
-        "id": 2
       }
     ]
   },
@@ -104,7 +86,7 @@
   },
   "counters": {
     "event": {
-      "id": 2
+      "id": 4
     },
     "user": {},
     "event_guests__user_participated": {}

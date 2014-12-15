@@ -14,6 +14,7 @@ module.exports = {
    */
 
   create: function(req, res) {
+    sails.log(req.params.all());
     sails.controllers['event'].add(req.params.all()).then(function(data) {
       res.ok(data);
     }).catch(function(err) {

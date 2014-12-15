@@ -1,0 +1,112 @@
+{
+  "data": {
+    "user": [],
+    "event_guests__user_participated": [],
+    "event": [
+      {
+        "createdAt": "2014-12-15T10:46:16.747Z",
+        "updatedAt": "2014-12-15T10:46:16.747Z",
+        "id": 1
+      },
+      {
+        "place": "Gaulle",
+        "date": "2011-04-11T11:51:00.000Z",
+        "content": "Allez viens!",
+        "readed": [
+          {
+            "id_facebook": "qkjsqsdqs",
+            "readed": "false"
+          },
+          {
+            "id_facebook": "jlqsdklqjsd",
+            "readed": "true"
+          }
+        ],
+        "createdAt": "2014-12-15T12:30:04.737Z",
+        "updatedAt": "2014-12-15T12:30:04.737Z",
+        "id": 2
+      }
+    ]
+  },
+  "schema": {
+    "user": {
+      "id_facebook": {
+        "type": "string",
+        "unique": true
+      },
+      "username": {
+        "type": "string"
+      },
+      "device": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "event_guests__user_participated": {
+      "id": {
+        "primaryKey": true,
+        "unique": true,
+        "autoIncrement": true,
+        "type": "integer"
+      },
+      "event_guests": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "event",
+        "on": "id",
+        "via": "user_participated"
+      },
+      "user_participated": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "user",
+        "on": "id",
+        "via": "event_guests"
+      }
+    },
+    "event": {
+      "place": {
+        "type": "string"
+      },
+      "date": {
+        "type": "datetime"
+      },
+      "content": {
+        "type": "string"
+      },
+      "readed": {
+        "type": "json"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "event": {
+      "id": 2
+    },
+    "user": {},
+    "event_guests__user_participated": {}
+  }
+}

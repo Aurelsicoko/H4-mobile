@@ -7,20 +7,20 @@
 
 module.exports = {
 
-  connection: 'localDiskDb',
   attributes: {
     id_facebook: {
-      type: 'string',
-      required: true
+      type: 'STRING',
+      required: true,
+      unique: true
     },
     username: {
-      type: 'string',
+      type: 'STRING',
       minLength: 3,
       maxLength: 25,
       required: true
     },
     device: {
-      type: 'string',
+      type: 'STRING',
       required: true
     },
     participated: {

@@ -7,25 +7,32 @@
 
 module.exports = {
 
-  connection: 'localDiskDb',
   attributes: {
     place: {
-      type: 'integer',
+      type: 'STRING',
       required: true
     },
     date: {
-      type: 'datetime',
+      type: 'DATETIME',
       required: true
     },
     content: {
-      type: 'string'
+      type: 'STRING'
     },
     readed: {
-      type: 'json'
+      type: 'JSON'
     },
     guests: {
       collection: 'user',
       via: 'participated'
+    }
+  },
+
+  // Lifecycle Callbacks
+  beforeCreate: function(values, next) {
+    if (values.date) {
+      values.date = new Date(values.date);
+      next();
     }
   }
 };

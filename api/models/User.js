@@ -8,7 +8,7 @@
 module.exports = {
 
   attributes: {
-    id_facebook: {
+    facebook_id: {
       type: 'STRING',
       required: true,
       unique: true

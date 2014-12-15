@@ -45,6 +45,13 @@ module.exports = {
     });
   },
 
+  register: function(req, res) {
+    Event.subscribe(req.params.all()).exec(function(err, cb) {
+      if (err) res.badRequest(err);
+      res.ok(cb);
+    });
+  }
+
   add: function(scope) {
     var deferred = Q.defer();
 
@@ -70,7 +77,7 @@ module.exports = {
             if (err) {
               deferred.reject(err);
             } else {
-              sails.controllers['event'].addReader(event.reader, user).then(function(data) {
+              sails.controllers['event'].subscribe(event.reader, user, null).then(function(data) {
                 sails.log("User update : " + data);
               }).catch(function(err) {
                 deferred.reject(err);
@@ -122,21 +129,38 @@ module.exports = {
     return deferred.promise;
   },
 
-  addReader: function(json, reader) {
+  subscribe: function(scope) {
     var deferred = Q.defer();
-    var parse = JSON.parse(json);
-    var json = {
-      user: reader.id,
-      readed: false
-    };
 
-    parse.push(json);
+    if (!scope) {
+      deferred.resolve("You can't update undefined record");
+    }
 
-    sails.controllers['event'].edit(parse).then(function(data) {
-      deferred.resolve(updated);
+    Event.find(scope.id).exec(function(err, event) {
+      sails.controllers['event'].updateJSONReader(event.reader, scope.user, scope.answer).then(function(data) {
+        event.reader = data;
+        sails.controllers['event'].edit(event).then(function(data) {
+          deferred.resolve(data);
+        }).catch(function(err) {
+          deferred.reject(err);
+        });
+      })
     }).catch(function(err) {
       deferred.reject(err);
     });
+
+    return deferred.promise;
+  },
+
+  updateJSONReader: function(event_reader, user, bool) {
+    var deferred = Q.defer();
+
+    var parse = JSON.parse(event_reader);
+    parse[user.id] = {
+      readed: (bool) ? bool : null
+    }
+
+    deferred.resolve(parse);
 
     return deferred.promise;
   }

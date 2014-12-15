@@ -42,6 +42,10 @@ module.exports.routes = {
     controller: 'EventController',
     action: 'create'
   },
+  'post /event/:id': {
+    controller: 'EventController',
+    action: 'register'
+  },
   'put /event/:id': {
     controller: 'EventController',
     action: 'update'

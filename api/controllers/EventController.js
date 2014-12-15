@@ -82,8 +82,7 @@ module.exports = {
               scope.answer = null;
 
               sails.controllers['event'].subscribe(scope).then(function(data) {
-                sails.log("User update >>>");
-                sails.log(data);
+                deferred.resolve(data);
               }).catch(function(err) {
                 return deferred.reject(err);
               });
@@ -162,13 +161,13 @@ module.exports = {
   updateJSONReader: function(event_readed, user, bool) {
     var deferred = Q.defer();
 
-
-    var parse = (event_readed.length > 0) ? JSON.parse(event_readed) : {};
-    parse[user] = {
+    var parse = (event_readed.length > 0) ? event_readed : [];
+    var tmp = {};
+    tmp[user] = {
       readed: (bool) ? bool : null
     };
 
-    sails.log(parse);
+    parse.push(tmp);
 
     deferred.resolve(parse);
 

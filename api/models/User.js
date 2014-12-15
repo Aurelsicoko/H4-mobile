@@ -25,7 +25,7 @@ module.exports = {
     },
     owner: {
       collection: 'event',
-      via: 'created'
+      via: 'createdBy'
     },
     participated: {
       collection: 'event',

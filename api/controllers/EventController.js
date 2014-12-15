@@ -53,22 +53,29 @@ module.exports = {
     } else {
       // Find the author's event
       User.find(scope.author).exec(function(err, user) {
-        if (err) return deferred.reject(err);
-        scope.created = user;
+        if (err) deferred.reject(err);
+        scope.createdBy = user;
       });
     }
 
     Event.create(scope).exec(function(err, event) {
-      if (err) return deferred.reject(err);
+      if (err) deferred.reject(err);
 
       _.each(scope.guests, function(guest) {
         User.find(guest).exec(function(err, user) {
-          if (err) return deferred.reject(err);
+          if (err) deferred.reject(err);
 
-          // Save the user, creating the new associations in the join table if not exist
           event.guests.add(user);
           event.save(function(err) {
-            if (err) return deferred.reject(err);
+            if (err) {
+              deferred.reject(err);
+            } else {
+              sails.controllers['event'].addReader(event.reader, user).then(function(data) {
+                sails.log("User update : " + data);
+              }).catch(function(err) {
+                deferred.reject(err);
+              });
+            }
           });
         });
       });
@@ -110,6 +117,25 @@ module.exports = {
       deferred.resolve(updated);
 
       console.log('Updated - Event');
+    });
+
+    return deferred.promise;
+  },
+
+  addReader: function(json, reader) {
+    var deferred = Q.defer();
+    var parse = JSON.parse(json);
+    var json = {
+      user: reader.id,
+      readed: false
+    };
+
+    parse.push(json);
+
+    sails.controllers['event'].edit(parse).then(function(data) {
+      deferred.resolve(updated);
+    }).catch(function(err) {
+      deferred.reject(err);
     });
 
     return deferred.promise;

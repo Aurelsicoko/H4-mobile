@@ -8,12 +8,8 @@
 module.exports = {
 
   attributes: {
-    place: {
+    title: {
       type: 'STRING',
-      required: true
-    },
-    date: {
-      type: 'DATETIME',
       required: true
     },
     content: {
@@ -22,7 +18,7 @@ module.exports = {
     readed: {
       type: 'JSON'
     },
-    created: {
+    createdBy: {
       model: 'user'
     },
     guests: {

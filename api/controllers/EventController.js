@@ -6,6 +6,7 @@
  */
 
 var Q = require('q');
+var _ = require('lodash');
 
 module.exports = {
 
@@ -44,23 +45,34 @@ module.exports = {
     });
   },
 
-  // Function for views
   add: function(scope) {
     var deferred = Q.defer();
 
     if (!scope) {
       deferred.resolve("You can't add undefined record");
     } else {
-      User.find(scope.user).exec(function(err, user) {
+      // Find the author's event
+      User.find(scope.author).exec(function(err, user) {
         if (err) return deferred.reject(err);
         scope.created = user;
-
-        scope.guest =
       });
     }
 
-    Event.create(scope).exec(function(err, created) {
+    Event.create(scope).exec(function(err, event) {
       if (err) return deferred.reject(err);
+
+      _.each(scope.guests, function(guest) {
+        User.find(guest).exec(function(err, user) {
+          if (err) return deferred.reject(err);
+
+          // Save the user, creating the new associations in the join table if not exist
+          event.guests.add(user);
+          event.save(function(err) {
+            if (err) return deferred.reject(err);
+          });
+        });
+      });
+
       deferred.resolve(created);
 
       console.log('Created - Event');

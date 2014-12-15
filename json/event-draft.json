@@ -1,0 +1,13 @@
+{
+  "author": "user_id_from_sails",
+  "place": "9, pl du Général de Gaulle",
+  "date": "2011-04-11T11:51:00",
+  "content": "A short description of the event",
+  "readed": [{
+    "user": "user_id_from_sails",
+    "readed": "false"
+  }, {
+    "user": "user_id_from_sails",
+    "readed": "true"
+  }]
+}

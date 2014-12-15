@@ -7,5 +7,6 @@
   }, {
     "user": "user_id_from_sails",
     "readed": "true"
-  }]
+  }],
+  "guests": ["user_id", "user_id2", "user_id3"]
 }

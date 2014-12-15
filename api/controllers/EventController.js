@@ -85,9 +85,11 @@ module.exports = {
             }
           });
         });
-      });
 
-      deferred.resolve(created);
+        sails.controllers['events'].get(event).then(function(data) {
+          deferred.resolve(data);
+        });
+      });
 
       console.log('Created - Event');
     });
@@ -102,7 +104,7 @@ module.exports = {
       scope = null;
     }
 
-    Event.find(scope).exec(function(err, readed) {
+    Event.find(scope).populate('guests').populate('createdBy').exec(function(err, readed) {
       if (err) return deferred.reject(err);
       deferred.resolve(readed);
 

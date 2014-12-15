@@ -25,13 +25,5 @@ module.exports = {
       collection: 'user',
       via: 'participated'
     }
-  },
-
-  // Lifecycle Callbacks
-  beforeCreate: function(values, next) {
-    if (values.date) {
-      values.date = new Date(values.date);
-      next();
-    }
   }
 };

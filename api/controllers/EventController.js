@@ -67,14 +67,17 @@ module.exports = {
       });
     }
 
-    Event.create(scope).exec(function(err, event) {
-      if (err) return deferred.reject(err);
+    var guests = scope.guests;
+    scope.guests = null;
 
-      _.each(scope.guests, function(guest) {
+    Event.create(scope).exec(function(err, event) {
+      if (err) deferred.reject(err);
+
+      _.each(guests, function(guest) {
         User.findOne({
           facebook_id: guest
         }).exec(function(err, user) {
-          if (err) return deferred.reject(err);
+          if (err) deferred.reject(err);
 
           event.guests.add(user);
           event.save(function(err) {
@@ -86,10 +89,7 @@ module.exports = {
               scope.user = user;
               scope.answer = null;
 
-              sails.controllers['event'].subscribe(scope).then(function(data) {
-                sails.log(data);
-                deferred.resolve(data);
-              }).catch(function(err) {
+              sails.controllers['event'].subscribe(scope).catch(function(err) {
                 return deferred.reject(err);
               });
             }
@@ -97,8 +97,8 @@ module.exports = {
         });
       });
 
-      sails.controllers['event'].get(event).then(function(data) {
-        deferred.resolve(data);
+      sails.controllers['event'].get(event.id).then(function(data) {
+        deferred.resolve(data[0]);
       });
 
       console.log('Created - Event');
@@ -149,7 +149,7 @@ module.exports = {
     }
 
     Event.findOne(scope.id).exec(function(err, event) {
-      sails.controllers['event'].updateJSONReader(event.readed, scope.user.id, scope.answer).then(function(data) {
+      sails.controllers['event'].updateJSONReader(event.readed, scope.user.facebook_id, scope.answer).then(function(data) {
         event.readed = data;
         sails.controllers['event'].edit(event).then(function(data) {
           deferred.resolve(data);

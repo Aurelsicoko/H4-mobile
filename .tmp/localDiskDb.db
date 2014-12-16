@@ -1,0 +1,222 @@
+{
+  "data": {
+    "event": [
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [
+          {
+            "1": {
+              "readed": null
+            }
+          }
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-16T09:52:58.697Z",
+        "updatedAt": "2014-12-16T09:52:58.746Z",
+        "id": 1
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [
+          {
+            "1": {
+              "readed": null
+            }
+          }
+        ],
+        "createdBy": null,
+        "createdAt": "2014-12-16T09:54:25.706Z",
+        "updatedAt": "2014-12-16T09:54:25.751Z",
+        "id": 2
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [
+          {
+            "1": {
+              "readed": null
+            }
+          }
+        ],
+        "createdBy": 1,
+        "createdAt": "2014-12-16T09:56:00.059Z",
+        "updatedAt": "2014-12-16T09:56:00.111Z",
+        "id": 3
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [
+          {
+            "1": {
+              "readed": null
+            }
+          }
+        ],
+        "createdBy": 1,
+        "createdAt": "2014-12-16T09:56:56.110Z",
+        "updatedAt": "2014-12-16T09:56:56.160Z",
+        "id": 4
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [],
+        "createdBy": 1,
+        "createdAt": "2014-12-16T09:58:49.765Z",
+        "updatedAt": "2014-12-16T09:58:49.792Z",
+        "id": 5
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [],
+        "createdBy": 1,
+        "createdAt": "2014-12-16T10:01:02.906Z",
+        "updatedAt": "2014-12-16T10:01:02.935Z",
+        "id": 6
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [
+          {
+            "1": {
+              "readed": null
+            }
+          }
+        ],
+        "createdBy": 1,
+        "createdAt": "2014-12-16T10:01:13.173Z",
+        "updatedAt": "2014-12-16T10:01:13.240Z",
+        "id": 7
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [],
+        "createdBy": 1,
+        "createdAt": "2014-12-16T10:01:47.519Z",
+        "updatedAt": "2014-12-16T10:01:47.547Z",
+        "id": 8
+      }
+    ],
+    "user": [
+      {
+        "facebook_id": "facebook_id",
+        "username": "Charles Talbot",
+        "device": "device_id",
+        "createdAt": "2014-12-16T09:52:32.630Z",
+        "updatedAt": "2014-12-16T09:52:32.630Z",
+        "id": 1
+      }
+    ],
+    "event_guests__user_participated": [
+      {
+        "user_participated": 1,
+        "event_guests": 5,
+        "id": 5
+      },
+      {
+        "user_participated": 1,
+        "event_guests": 6,
+        "id": 6
+      },
+      {
+        "user_participated": 1,
+        "event_guests": 8,
+        "id": 8
+      }
+    ]
+  },
+  "schema": {
+    "event": {
+      "title": {
+        "type": "string"
+      },
+      "content": {
+        "type": "string"
+      },
+      "readed": {
+        "type": "json"
+      },
+      "createdBy": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "user": {
+      "facebook_id": {
+        "type": "string",
+        "unique": true
+      },
+      "username": {
+        "type": "string"
+      },
+      "device": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "event_guests__user_participated": {
+      "id": {
+        "primaryKey": true,
+        "unique": true,
+        "autoIncrement": true,
+        "type": "integer"
+      },
+      "event_guests": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "event",
+        "on": "id",
+        "via": "user_participated"
+      },
+      "user_participated": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "user",
+        "on": "id",
+        "via": "event_guests"
+      }
+    }
+  },
+  "counters": {
+    "event": {
+      "id": 8
+    },
+    "user": {
+      "id": 1
+    },
+    "event_guests__user_participated": {
+      "id": 8
+    }
+  }
+}

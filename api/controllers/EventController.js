@@ -59,7 +59,7 @@ module.exports = {
       deferred.resolve("You can't add undefined record");
     } else {
       // Find the author's event
-      User.find(scope.author).exec(function(err, user) {
+      User.findOne(scope.author).exec(function(err, user) {
         if (err) return deferred.reject(err);
         scope.createdBy = user;
       });
@@ -72,6 +72,7 @@ module.exports = {
         User.findOne(guest).exec(function(err, user) {
           if (err) return deferred.reject(err);
 
+          event.guests.add(user);
           event.save(function(err) {
             if (err) {
               sails.log(err);
@@ -82,6 +83,7 @@ module.exports = {
               scope.answer = null;
 
               sails.controllers['event'].subscribe(scope).then(function(data) {
+                sails.log(data);
                 deferred.resolve(data);
               }).catch(function(err) {
                 return deferred.reject(err);

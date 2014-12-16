@@ -1,22 +1,5 @@
 {
   "data": {
-    "user": [
-      {
-        "facebook_id": "facebook_id",
-        "username": "Charles Talbot",
-        "device": "device_id",
-        "createdAt": "2014-12-16T18:27:51.716Z",
-        "updatedAt": "2014-12-16T18:28:07.481Z",
-        "id": 1
-      }
-    ],
-    "event_guests__user_participated": [
-      {
-        "user_participated": 1,
-        "event_guests": 2,
-        "id": 2
-      }
-    ],
     "event": [
       {
         "title": "event_title",
@@ -41,10 +24,83 @@
         "createdAt": "2014-12-16T18:28:07.426Z",
         "updatedAt": "2014-12-16T18:28:07.496Z",
         "id": 2
+      },
+      {
+        "title": "L'event de test",
+        "content": "A short description of the event",
+        "readed": [
+          {
+            "10205538099118258": {
+              "readed": null
+            }
+          }
+        ],
+        "createdBy": 2,
+        "createdAt": "2014-12-16T23:32:09.218Z",
+        "updatedAt": "2014-12-16T23:32:09.284Z",
+        "id": 3
+      }
+    ],
+    "user": [
+      {
+        "facebook_id": "facebook_id",
+        "username": "Charles Talbot",
+        "device": "device_id",
+        "createdAt": "2014-12-16T18:27:51.716Z",
+        "updatedAt": "2014-12-16T18:28:07.481Z",
+        "id": 1
+      },
+      {
+        "facebook_id": "10205538099118258",
+        "username": "Aurélien Georget",
+        "device": "IUI98408390839083",
+        "createdAt": "2014-12-16T23:31:47.580Z",
+        "updatedAt": "2014-12-16T23:32:09.274Z",
+        "id": 2
+      }
+    ],
+    "event_guests__user_participated": [
+      {
+        "user_participated": 1,
+        "event_guests": 2,
+        "id": 2
+      },
+      {
+        "user_participated": 2,
+        "event_guests": 3,
+        "id": 4
       }
     ]
   },
   "schema": {
+    "event": {
+      "title": {
+        "type": "string"
+      },
+      "content": {
+        "type": "string"
+      },
+      "readed": {
+        "type": "json"
+      },
+      "createdBy": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
     "user": {
       "facebook_id": {
         "type": "string",
@@ -90,45 +146,17 @@
         "on": "id",
         "via": "event_guests"
       }
-    },
-    "event": {
-      "title": {
-        "type": "string"
-      },
-      "content": {
-        "type": "string"
-      },
-      "readed": {
-        "type": "json"
-      },
-      "createdBy": {
-        "type": "integer",
-        "model": "user",
-        "foreignKey": true
-      },
-      "id": {
-        "type": "integer",
-        "autoIncrement": true,
-        "primaryKey": true,
-        "unique": true
-      },
-      "createdAt": {
-        "type": "datetime"
-      },
-      "updatedAt": {
-        "type": "datetime"
-      }
     }
   },
   "counters": {
     "event": {
-      "id": 2
+      "id": 3
     },
     "user": {
-      "id": 1
+      "id": 2
     },
     "event_guests__user_participated": {
-      "id": 2
+      "id": 4
     }
   }
 }

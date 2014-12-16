@@ -19,7 +19,8 @@ module.exports = {
       type: 'JSON'
     },
     createdBy: {
-      model: 'user'
+      collection: 'user',
+      via: 'owner'
     },
     guests: {
       collection: 'user',

@@ -6,6 +6,7 @@
  */
 
 var Q = require('q');
+var _ = require('lodash');
 
 module.exports = {
 
@@ -65,24 +66,38 @@ module.exports = {
   get: function(scope) {
     var deferred = Q.defer();
 
-    sails.log(scope);
-
     if (!scope || !scope.id) {
       scope = null;
+
+      User.find(scope).populate('owner').populate('participated').exec(function(err, readed) {
+        if (err) return deferred.reject(err);
+        deferred.resolve(readed);
+
+        console.log('Readed - User');
+      });
     } else {
       scope = {
         facebook_id: scope.id
       };
+
+      User.findOne(scope).populate('participated').populate('owner').exec(function(err, user) {
+        sails.controllers['event'].get().then(function(events) {
+          var array = [];
+          for (var i = 0; i < events.length; ++i) {
+            if (events[i]["createdBy"]) {
+              if (events[i]["createdBy"]['id'] === user.id) {
+                delete events[i]["createdBy"];
+                array.push(events[i]);
+              }
+            }
+          }
+
+          user.owner = array;
+
+          deferred.resolve(user);
+        });
+      });
     }
-
-    sails.log(scope);
-
-    User.find(scope).populate('participated').populate('owner').exec(function(err, readed) {
-      if (err) return deferred.reject(err);
-      deferred.resolve(readed);
-
-      console.log('Readed - User');
-    });
 
     return deferred.promise;
   },

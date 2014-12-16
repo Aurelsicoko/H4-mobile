@@ -69,7 +69,9 @@ module.exports = {
       scope = null;
     }
 
-    User.find(scope).populate('participated').populate('owner').exec(function(err, readed) {
+    User.find({
+      facebook_id: scope.id
+    }).populate('participated').populate('owner').exec(function(err, readed) {
       if (err) return deferred.reject(err);
       deferred.resolve(readed);
 
@@ -86,7 +88,9 @@ module.exports = {
       deferred.resolve("You can't update undefined record");
     }
 
-    User.update(scope.id, scope).exec(function(err, updated) {
+    User.update({
+      facebook_id: scope.id
+    }, scope).exec(function(err, updated) {
       if (err) return deferred.reject(err);
       deferred.resolve(updated);
 

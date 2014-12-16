@@ -1,5 +1,32 @@
 {
   "data": {
+    "user": [
+      {
+        "facebook_id": "facebook_id",
+        "username": "Charles Talbot",
+        "device": "device_id",
+        "createdAt": "2014-12-16T09:52:32.630Z",
+        "updatedAt": "2014-12-16T09:52:32.630Z",
+        "id": 1
+      }
+    ],
+    "event_guests__user_participated": [
+      {
+        "user_participated": 1,
+        "event_guests": 5,
+        "id": 5
+      },
+      {
+        "user_participated": 1,
+        "event_guests": 6,
+        "id": 6
+      },
+      {
+        "user_participated": 1,
+        "event_guests": 8,
+        "id": 8
+      }
+    ],
     "event": [
       {
         "title": "event_title",
@@ -103,64 +130,9 @@
         "updatedAt": "2014-12-16T10:01:47.547Z",
         "id": 8
       }
-    ],
-    "user": [
-      {
-        "facebook_id": "facebook_id",
-        "username": "Charles Talbot",
-        "device": "device_id",
-        "createdAt": "2014-12-16T09:52:32.630Z",
-        "updatedAt": "2014-12-16T09:52:32.630Z",
-        "id": 1
-      }
-    ],
-    "event_guests__user_participated": [
-      {
-        "user_participated": 1,
-        "event_guests": 5,
-        "id": 5
-      },
-      {
-        "user_participated": 1,
-        "event_guests": 6,
-        "id": 6
-      },
-      {
-        "user_participated": 1,
-        "event_guests": 8,
-        "id": 8
-      }
     ]
   },
   "schema": {
-    "event": {
-      "title": {
-        "type": "string"
-      },
-      "content": {
-        "type": "string"
-      },
-      "readed": {
-        "type": "json"
-      },
-      "createdBy": {
-        "type": "integer",
-        "model": "user",
-        "foreignKey": true
-      },
-      "id": {
-        "type": "integer",
-        "autoIncrement": true,
-        "primaryKey": true,
-        "unique": true
-      },
-      "createdAt": {
-        "type": "datetime"
-      },
-      "updatedAt": {
-        "type": "datetime"
-      }
-    },
     "user": {
       "facebook_id": {
         "type": "string",
@@ -205,6 +177,34 @@
         "references": "user",
         "on": "id",
         "via": "event_guests"
+      }
+    },
+    "event": {
+      "title": {
+        "type": "string"
+      },
+      "content": {
+        "type": "string"
+      },
+      "readed": {
+        "type": "json"
+      },
+      "createdBy": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
       }
     }
   },

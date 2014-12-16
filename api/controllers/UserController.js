@@ -65,13 +65,19 @@ module.exports = {
   get: function(scope) {
     var deferred = Q.defer();
 
-    if (!scope) {
+    sails.log(scope);
+
+    if (!scope || !scope.id) {
       scope = null;
+    } else {
+      scope = {
+        facebook_id: scope.id
+      };
     }
 
-    User.find({
-      facebook_id: scope.id
-    }).populate('participated').populate('owner').exec(function(err, readed) {
+    sails.log(scope);
+
+    User.find(scope).populate('participated').populate('owner').exec(function(err, readed) {
       if (err) return deferred.reject(err);
       deferred.resolve(readed);
 

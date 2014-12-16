@@ -29,8 +29,7 @@ module.exports = {
     },
     participated: {
       collection: 'event',
-      via: 'guests',
-      dominant: true
+      via: 'guests'
     }
   }
 };

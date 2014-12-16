@@ -23,7 +23,8 @@ module.exports = {
     },
     guests: {
       collection: 'user',
-      via: 'participated'
+      via: 'participated',
+      dominant: true
     }
   }
 };

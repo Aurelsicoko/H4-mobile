@@ -68,7 +68,7 @@ module.exports = {
     }
 
     var guests = scope.guests;
-    scope.guests = null;
+    delete scope.guests;
 
     Event.create(scope).exec(function(err, event) {
       if (err) deferred.reject(err);
@@ -89,7 +89,7 @@ module.exports = {
               scope.user = user;
               scope.answer = null;
 
-              sails.controllers['event'].subscribe(scope).catch(function(err) {
+              sails.controllers['event'].subscribe(scope).then(function(data) {}).catch(function(err) {
                 return deferred.reject(err);
               });
             }
@@ -114,7 +114,7 @@ module.exports = {
       scope = null;
     }
 
-    Event.find(scope).populate('guests').populate('createdBy').exec(function(err, readed) {
+    Event.find(scope).populate('createdBy').populate('guests').exec(function(err, readed) {
       if (err) return deferred.reject(err);
       deferred.resolve(readed);
 
@@ -148,7 +148,7 @@ module.exports = {
       deferred.resolve("You can't update undefined record");
     }
 
-    Event.findOne(scope.id).exec(function(err, event) {
+    Event.findOne(scope.id).populate('createdBy').populate('guests').exec(function(err, event) {
       sails.controllers['event'].updateJSONReader(event.readed, scope.user.facebook_id, scope.answer).then(function(data) {
         event.readed = data;
         sails.controllers['event'].edit(event).then(function(data) {

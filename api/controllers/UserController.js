@@ -81,21 +81,25 @@ module.exports = {
       };
 
       User.findOne(scope).populate('participated').populate('owner').exec(function(err, user) {
-        sails.controllers['event'].get().then(function(events) {
-          var array = [];
-          for (var i = 0; i < events.length; ++i) {
-            if (events[i]["createdBy"]) {
-              if (events[i]["createdBy"]['id'] === user.id) {
-                delete events[i]["createdBy"];
-                array.push(events[i]);
+        if (!user) {
+          deferred.resolve([]);
+        } else {
+          sails.controllers['event'].get().then(function(events) {
+            var array = [];
+            for (var i = 0; i < events.length; ++i) {
+              if (events[i]["createdBy"]) {
+                if (events[i]["createdBy"]['id'] === user.id) {
+                  delete events[i]["createdBy"];
+                  array.push(events[i]);
+                }
               }
             }
-          }
 
-          user.owner = array;
+            user.owner = array;
 
-          deferred.resolve(user);
-        });
+            deferred.resolve(user);
+          });
+        }
       });
     }
 

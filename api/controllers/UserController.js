@@ -69,7 +69,7 @@ module.exports = {
       scope = null;
     }
 
-    User.find(scope).populate('participated').exec(function(err, readed) {
+    User.find(scope).populate('participated').populate('owner').exec(function(err, readed) {
       if (err) return deferred.reject(err);
       deferred.resolve(readed);
 

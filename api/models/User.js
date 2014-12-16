@@ -7,7 +7,6 @@
 
 module.exports = {
 
-  connection: "someMongodbServer",
   attributes: {
     facebook_id: {
       type: 'STRING',

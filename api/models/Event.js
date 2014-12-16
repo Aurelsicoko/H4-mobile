@@ -7,7 +7,6 @@
 
 module.exports = {
 
-  connection: "someMongodbServer",
   attributes: {
     title: {
       type: 'STRING',

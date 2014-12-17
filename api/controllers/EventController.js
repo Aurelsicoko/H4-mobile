@@ -65,7 +65,7 @@ module.exports = {
       // Find the author's event
       User.findOne({
         facebook_id: scope.author
-      }).exec(function(err, user) {
+      }).populate('owner').populate('participated').exec(function(err, user) {
         if (err) return deferred.reject(err);
 
         scope.createdBy = user;
@@ -77,7 +77,7 @@ module.exports = {
           _.each(guests, function(guest) {
             User.findOne({
               facebook_id: guest
-            }).exec(function(err, user) {
+            }).populate('owner').populate('participated').exec(function(err, user) {
               if (err) deferred.reject(err);
 
               event.guests.add(user);

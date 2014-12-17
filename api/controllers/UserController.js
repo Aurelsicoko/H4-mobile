@@ -84,6 +84,13 @@ module.exports = {
         if (!user) {
           deferred.resolve([]);
         } else {
+
+          for (var o = 0; o < user.participated.length; ++o) {
+            User.findOne(2).exec(function(err, found) {
+              user.participated[o].createdBy = found;
+            });
+          }
+
           sails.controllers['event'].get().then(function(events) {
             var array = [];
             for (var i = 0; i < events.length; ++i) {

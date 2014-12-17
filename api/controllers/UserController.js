@@ -86,11 +86,13 @@ module.exports = {
         } else {
 
           for (var o = 0; o < user.participated.length; ++o) {
-            User.findOne(user.participated[o].createdBy).exec(function(err, found) {
-              if (found) {
-                user.participated[o].createdBy = found;
-              }
-            });
+            if (user.participated[o].createdBy) {
+              User.findOne(user.participated[o].createdBy).exec(function(err, found) {
+                if (found) {
+                  user.participated[o].createdBy = found;
+                }
+              });
+            }
           }
 
           sails.controllers['event'].get().then(function(events) {

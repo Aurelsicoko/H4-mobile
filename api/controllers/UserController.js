@@ -101,6 +101,8 @@ module.exports = {
                 } else {
                   o++;
                 }
+              }).catch(function(err) {
+                o++;
               });
             } else {
               o++;

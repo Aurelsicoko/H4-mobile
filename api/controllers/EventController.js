@@ -46,9 +46,10 @@ module.exports = {
   },
 
   register: function(req, res) {
-    Event.subscribe(req.params.all()).exec(function(err, cb) {
-      if (err) res.badRequest(err);
-      res.ok(cb);
+    sails.controllers['event'].subscribe(req.params.all()).then(function(data) {
+      res.ok(data);
+    }).catch(function(err) {
+      res.badRequest(err);
     });
   },
 
@@ -65,46 +66,56 @@ module.exports = {
       // Find the author's event
       User.findOne({
         facebook_id: scope.author
-      }).populate('owner').populate('participated').exec(function(err, user) {
+      }).exec(function(err, user) {
         if (err) return deferred.reject(err);
 
-        scope.createdBy = user;
+        if (!user) {
+          deferred.reject("This author doesn't exist");
+        } else {
 
-        Event.create(scope).exec(function(err, event) {
-          if (err) deferred.reject(err);
+          scope.createdBy = user;
 
+          Event.create(scope).exec(function(err, event) {
+            if (err) deferred.reject(err);
 
-          _.each(guests, function(guest) {
-            User.findOne({
-              facebook_id: guest
-            }).populate('owner').populate('participated').exec(function(err, user) {
-              if (err) deferred.reject(err);
+            if (!event) {
+              deferred.reject("This event can't be created");
+            } else {
 
-              event.guests.add(user);
-              event.save(function(err) {
-                if (err) {
-                  sails.log(err);
-                  return deferred.reject(err);
-                } else {
-                  var scope = event;
-                  scope.user = user;
-                  scope.answer = null;
+              _.each(guests, function(guest) {
+                User.findOne({
+                  facebook_id: guest
+                }).exec(function(err, user) {
+                  if (err) deferred.reject(err);
 
-                  sails.controllers['event'].subscribe(scope).then(function(data) {}).catch(function(err) {
-                    return deferred.reject(err);
-                  });
-                }
+                  if (user) {
+                    event.guests.add(user);
+                    event.save(function(err) {
+                      if (err) {
+                        sails.log(err);
+                        return deferred.reject(err);
+                      } else {
+                        var scope = event;
+                        scope.user = user;
+                        scope.answer = null;
+
+                        sails.controllers['event'].subscribe(scope).then(function(data) {}).catch(function(err) {
+                          return deferred.reject(err);
+                        });
+                      }
+                    });
+                  }
+                });
+
+                sails.controllers['event'].get(event.id).then(function(data) {
+                  deferred.resolve(data[0]);
+                });
+
+                console.log('Created - Event');
               });
-            });
-
-
-            sails.controllers['event'].get(event.id).then(function(data) {
-              deferred.resolve(data[0]);
-            });
-
-            console.log('Created - Event');
+            }
           });
-        });
+        }
       });
     }
 
@@ -148,22 +159,27 @@ module.exports = {
   subscribe: function(scope) {
     var deferred = Q.defer();
 
-    if (!scope) {
-      deferred.resolve("You can't update undefined record");
-    }
+    if (!scope || !scope.id || !scope.user || !scope.answer) {
+      deferred.reject("Your data are invalid or incorrect");
+    } else {
 
-    Event.findOne(scope.id).populate('createdBy').populate('guests').exec(function(err, event) {
-      sails.controllers['event'].updateJSONReader(event.readed, scope.user.facebook_id, scope.answer).then(function(data) {
-        event.readed = data;
-        sails.controllers['event'].edit(event).then(function(data) {
-          deferred.resolve(data);
-        }).catch(function(err) {
-          deferred.reject(err);
-        });
-      }).catch(function(err) {
-        deferred.reject(err);
+      Event.findOne(scope.id).populate('guests').exec(function(err, event) {
+        if (event) {
+          sails.controllers['event'].updateJSONReader(event.readed, scope.user, scope.answer).then(function(data) {
+            event.readed = data;
+            sails.controllers['event'].edit(event).then(function(data) {
+              deferred.resolve(data);
+            }).catch(function(err) {
+              deferred.reject(err);
+            });
+          }).catch(function(err) {
+            deferred.reject(err);
+          });
+        } else {
+          deferred.reject("This event doesn't exist");
+        }
       });
-    });
+    }
 
     return deferred.promise;
   },

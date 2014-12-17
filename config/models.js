@@ -14,5 +14,5 @@ module.exports.models = {
   // (defaults to localDiskDb)
   connection: 'localDiskDb',
   schema: true,
-  migrate: 'alter'
+  migrate: 'safe'
 };

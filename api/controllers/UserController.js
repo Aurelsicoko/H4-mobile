@@ -85,9 +85,15 @@ module.exports = {
           deferred.resolve([]);
         } else {
 
+          sails.log("LENGTH : " + user.participated.length);
+          sails.log(user.participated);
+
           for (var o = 0; o < user.participated.length; ++o) {
             if (user.participated[o].createdBy) {
+              sails.log("USER participated createdBy exist : " + user.participated[o].createdBy);
               User.findOne(user.participated[o].createdBy).exec(function(err, found) {
+                sails.log("FOUND exist ");
+                sails.log(found);
                 if (found) {
                   user.participated[o].createdBy = found;
                 }
@@ -100,7 +106,6 @@ module.exports = {
             for (var i = 0; i < events.length; ++i) {
               if (events[i]["createdBy"]) {
                 if (events[i]["createdBy"]['id'] === user.id) {
-                  delete events[i]["createdBy"];
                   array.push(events[i]);
                 }
               }

@@ -85,44 +85,16 @@ module.exports = {
           deferred.resolve([]);
         } else {
 
-          sails.log("#{1} LENGTH : " + user.participated.length);
-          sails.log(user.participated);
-
-          var o = 0;
-          while (o < user.participated.length) {
-            if (user.participated[o].createdBy) {
-              sails.log("#{2} USER participated createdBy exist : " + user.participated[o].createdBy);
-              User.findOne(user.participated[o].createdBy).exec(function(err, found) {
-                sails.log("#{3} FOUND exist ");
-                sails.log(found);
-                if (found) {
-                  user.participated[o].createdBy = found;
-                  o++;
-                } else {
-                  o++;
-                }
-              }).catch(function(err) {
-                o++;
-              });
-            } else {
-              o++;
-            }
-          }
-
-          sails.controllers['event'].get().then(function(events) {
-            var array = [];
-            for (var i = 0; i < events.length; ++i) {
-              if (events[i]["createdBy"]) {
-                if (events[i]["createdBy"]['id'] === user.id) {
-                  array.push(events[i]);
-                }
-              }
-            }
-
-            user.owner = array;
+          Q.all([
+            sails.controllers['user'].populateParticipated(user),
+            sails.controllers['user'].populateOwner(user)
+          ]).spread(function(participated, owner) {
+            user.participated = participated;
+            user.owner = owner;
 
             deferred.resolve(user);
           });
+
         }
       });
     }
@@ -144,6 +116,47 @@ module.exports = {
       deferred.resolve(updated);
 
       console.log('Updated - User');
+    });
+
+    return deferred.promise;
+  },
+
+  populateParticipated: function(user) {
+    var deferred = Q.defer();
+
+    sails.controllers['event'].get().then(function(events) {
+      var array = [];
+      for (var i = 0; i < events.length; ++i) {
+        if (events[i]["guests"]) {
+          for (var o = 0; o < events[i]["guests"].length; o++) {
+            if (events[i]["guests"][o]["facebook_id"] === user.facebook_id) {
+              array.push(events[i]);
+            }
+          }
+
+        }
+      }
+
+      deferred.resolve(array);
+    });
+
+    return deferred.promise;
+  },
+
+  populateOwner: function(user) {
+    var deferred = Q.defer();
+
+    sails.controllers['event'].get().then(function(events) {
+      var array = [];
+      for (var i = 0; i < events.length; ++i) {
+        if (events[i]["createdBy"]) {
+          if (events[i]["createdBy"]['id'] === user.id) {
+            array.push(events[i]);
+          }
+        }
+      }
+
+      deferred.resolve(array);
     });
 
     return deferred.promise;

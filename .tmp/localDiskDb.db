@@ -29,11 +29,16 @@
             "facebook_id": {
               "readed": null
             }
+          },
+          {
+            "facebook_id2": {
+              "readed": "truel"
+            }
           }
         ],
         "createdBy": 1,
         "createdAt": "2014-12-17T11:04:12.478Z",
-        "updatedAt": "2014-12-17T11:04:12.508Z",
+        "updatedAt": "2014-12-17T12:39:12.144Z",
         "id": 2
       },
       {
@@ -44,11 +49,16 @@
             "facebook_id2": {
               "readed": null
             }
+          },
+          {
+            "facebookd_id": {
+              "readed": "truel"
+            }
           }
         ],
         "createdBy": 2,
         "createdAt": "2014-12-17T11:05:18.671Z",
-        "updatedAt": "2014-12-17T11:05:18.701Z",
+        "updatedAt": "2014-12-17T12:35:11.671Z",
         "id": 3
       }
     ],
@@ -73,18 +83,18 @@
     "event_guests__user_participated": [
       {
         "user_participated": 1,
-        "event_guests": 2,
-        "id": 4
+        "event_guests": 1,
+        "id": 7
       },
       {
         "user_participated": 2,
         "event_guests": 3,
-        "id": 6
+        "id": 8
       },
       {
         "user_participated": 1,
-        "event_guests": 1,
-        "id": 7
+        "event_guests": 2,
+        "id": 9
       }
     ]
   },
@@ -172,7 +182,7 @@
       "id": 2
     },
     "event_guests__user_participated": {
-      "id": 7
+      "id": 9
     }
   }
 }

@@ -26,7 +26,7 @@ module.exports.connections = {
   // Installed by default.
   //
   localDiskDb: {
-    adapter: 'sails-memory'
+    adapter: 'sails-disk'
   },
 
   // MongoDB is the leading NoSQL database.

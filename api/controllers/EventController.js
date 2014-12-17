@@ -58,51 +58,55 @@ module.exports = {
     if (!scope) {
       deferred.resolve("You can't add undefined record");
     } else {
+
+      var guests = scope.guests;
+      delete scope.guests;
+
       // Find the author's event
       User.findOne({
         facebook_id: scope.author
       }).exec(function(err, user) {
         if (err) return deferred.reject(err);
+
         scope.createdBy = user;
-      });
-    }
 
-    var guests = scope.guests;
-    delete scope.guests;
-
-    Event.create(scope).exec(function(err, event) {
-      if (err) deferred.reject(err);
-
-      _.each(guests, function(guest) {
-        User.findOne({
-          facebook_id: guest
-        }).exec(function(err, user) {
+        Event.create(scope).exec(function(err, event) {
           if (err) deferred.reject(err);
 
-          event.guests.add(user);
-          event.save(function(err) {
-            if (err) {
-              sails.log(err);
-              return deferred.reject(err);
-            } else {
-              var scope = event;
-              scope.user = user;
-              scope.answer = null;
 
-              sails.controllers['event'].subscribe(scope).then(function(data) {}).catch(function(err) {
-                return deferred.reject(err);
+          _.each(guests, function(guest) {
+            User.findOne({
+              facebook_id: guest
+            }).exec(function(err, user) {
+              if (err) deferred.reject(err);
+
+              event.guests.add(user);
+              event.save(function(err) {
+                if (err) {
+                  sails.log(err);
+                  return deferred.reject(err);
+                } else {
+                  var scope = event;
+                  scope.user = user;
+                  scope.answer = null;
+
+                  sails.controllers['event'].subscribe(scope).then(function(data) {}).catch(function(err) {
+                    return deferred.reject(err);
+                  });
+                }
               });
-            }
+            });
+
+
+            sails.controllers['event'].get(event.id).then(function(data) {
+              deferred.resolve(data[0]);
+            });
+
+            console.log('Created - Event');
           });
         });
       });
-
-      sails.controllers['event'].get(event.id).then(function(data) {
-        deferred.resolve(data[0]);
-      });
-
-      console.log('Created - Event');
-    });
+    }
 
     return deferred.promise;
   },

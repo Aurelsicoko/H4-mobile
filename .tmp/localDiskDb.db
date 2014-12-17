@@ -1,78 +1,144 @@
 {
   "data": {
+    "event_createdby__user_owner": [],
     "event": [
       {
         "title": "event_title",
         "content": "A short description of the event",
         "readed": [],
-        "createdBy": null,
-        "createdAt": "2014-12-16T18:27:37.711Z",
-        "updatedAt": "2014-12-16T18:27:37.718Z",
+        "createdAt": "2014-12-17T00:01:40.535Z",
+        "updatedAt": "2014-12-17T00:01:40.535Z",
         "id": 1
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [],
+        "createdAt": "2014-12-17T00:02:34.479Z",
+        "updatedAt": "2014-12-17T00:02:34.479Z",
+        "id": 2
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [],
+        "createdAt": "2014-12-17T00:03:33.351Z",
+        "updatedAt": "2014-12-17T00:03:33.356Z",
+        "id": 3
       },
       {
         "title": "event_title",
         "content": "A short description of the event",
         "readed": [
           {
-            "facebook_id": {
+            "0938903893083908390": {
+              "readed": null
+            }
+          }
+        ],
+        "createdAt": "2014-12-17T00:04:20.628Z",
+        "updatedAt": "2014-12-17T00:04:20.704Z",
+        "id": 4
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [
+          {
+            "0938903893083908390": {
+              "readed": null
+            }
+          }
+        ],
+        "createdAt": "2014-12-17T00:04:48.822Z",
+        "updatedAt": "2014-12-17T00:04:48.893Z",
+        "id": 5
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [
+          {
+            "0938903893083908390": {
+              "readed": null
+            }
+          }
+        ],
+        "createdAt": "2014-12-17T00:05:04.979Z",
+        "updatedAt": "2014-12-17T00:05:05.057Z",
+        "id": 6
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [
+          {
+            "0938903893083908390": {
+              "readed": null
+            }
+          }
+        ],
+        "createdAt": "2014-12-17T00:05:46.312Z",
+        "updatedAt": "2014-12-17T00:05:46.383Z",
+        "id": 7
+      },
+      {
+        "title": "event_title",
+        "content": "A short description of the event",
+        "readed": [
+          {
+            "0938903893083908390": {
               "readed": null
             }
           }
         ],
         "createdBy": 1,
-        "createdAt": "2014-12-16T18:28:07.426Z",
-        "updatedAt": "2014-12-16T18:28:07.496Z",
-        "id": 2
-      },
-      {
-        "title": "L'event de test",
-        "content": "A short description of the event",
-        "readed": [
-          {
-            "10205538099118258": {
-              "readed": null
-            }
-          }
-        ],
-        "createdBy": 2,
-        "createdAt": "2014-12-16T23:32:09.218Z",
-        "updatedAt": "2014-12-16T23:32:09.284Z",
-        "id": 3
+        "createdAt": "2014-12-17T00:17:14.606Z",
+        "updatedAt": "2014-12-17T00:17:14.692Z",
+        "id": 8
       }
     ],
     "user": [
       {
-        "facebook_id": "facebook_id",
+        "facebook_id": "0938903893083908390",
         "username": "Charles Talbot",
-        "device": "device_id",
-        "createdAt": "2014-12-16T18:27:51.716Z",
-        "updatedAt": "2014-12-16T18:28:07.481Z",
+        "device": "IUIOU8379837",
+        "createdAt": "2014-12-17T00:01:00.140Z",
+        "updatedAt": "2014-12-17T00:17:14.676Z",
         "id": 1
-      },
-      {
-        "facebook_id": "10205538099118258",
-        "username": "Aurélien Georget",
-        "device": "IUI98408390839083",
-        "createdAt": "2014-12-16T23:31:47.580Z",
-        "updatedAt": "2014-12-16T23:32:09.274Z",
-        "id": 2
       }
     ],
     "event_guests__user_participated": [
       {
         "user_participated": 1,
-        "event_guests": 2,
-        "id": 2
-      },
-      {
-        "user_participated": 2,
-        "event_guests": 3,
-        "id": 4
+        "event_guests": 8,
+        "id": 10
       }
     ]
   },
   "schema": {
+    "event_createdby__user_owner": {
+      "id": {
+        "primaryKey": true,
+        "unique": true,
+        "autoIncrement": true,
+        "type": "integer"
+      },
+      "event_createdBy": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "event",
+        "on": "id",
+        "via": "user_owner"
+      },
+      "user_owner": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "user",
+        "on": "id",
+        "via": "event_createdBy"
+      }
+    },
     "event": {
       "title": {
         "type": "string"
@@ -150,13 +216,14 @@
   },
   "counters": {
     "event": {
-      "id": 3
+      "id": 8
     },
     "user": {
-      "id": 2
+      "id": 1
     },
+    "event_createdby__user_owner": {},
     "event_guests__user_participated": {
-      "id": 4
+      "id": 10
     }
   }
 }

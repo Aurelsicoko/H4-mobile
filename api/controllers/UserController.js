@@ -86,8 +86,10 @@ module.exports = {
         } else {
 
           for (var o = 0; o < user.participated.length; ++o) {
-            User.findOne(2).exec(function(err, found) {
-              user.participated[o].createdBy = found;
+            User.findOne(user.participated[o].createdBy).exec(function(err, found) {
+              if (found) {
+                user.participated[o].createdBy = found;
+              }
             });
           }
 
